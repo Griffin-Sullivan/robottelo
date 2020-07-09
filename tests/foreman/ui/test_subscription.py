@@ -487,21 +487,26 @@ def test_positive_subscription_status_disabled(session, content_host_setup):
 
 
 @stubbed()
-def test_positive_candlepin_events_processed_by_stomp(self):
-    """Create host and attach subscription in the UI to verify
-       subscription status is valid
+def test_positive_candlepin_events_processed_by_STOMP(self):
+    """Verify that candlepin events are being read and processed by
+       attaching subscriptions, validating host subscriptions status,
+       and viewing processed/failed candlepin events
 
     :id: 9510fd1c-2efb-4132-8665-9a72273cd1af
 
-    :setup: register content host, verify 'subscription status' is
-            invalid, import a manifest
-
     :steps:
 
-        1. Add subscriptions to your content host
-        2. Return to content host list
+        1. Register Content Host without subscriptions attached
+        2. Verify subscriptions status is red "invalid"
+        3. Import a Manifest
+        4. Attach subs to content host
+        5. verify subscription status is green "valid"
+        6. check candlepin events processed/failed
 
-    :expectedresults: 'Subscription Status' is a green check mark.
+    :expectedresults: Candlepin events are being read and processed
+                      processed correctly without any failures
+
+    :BZ: #1826515
 
     :CaseImportance: High
     """

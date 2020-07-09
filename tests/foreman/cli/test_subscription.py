@@ -284,22 +284,26 @@ class SubscriptionTestCase(CLITestCase):
             assert "Disabled" in str(host_content)
 
     @stubbed()
-    def test_positive_candlepin_events_processed_by_stomp(self):
-        """Create host and attach subscription in the CLI to verify
-           subscription status is valid
+    def test_positive_candlepin_events_processed_by_STOMP(self):
+        """Verify that candlepin events are being read and processed by
+           attaching subscriptions, validating host subscriptions status,
+           and viewing processed/failed candlepin events
 
         :id: d54a7652-f87d-4277-a0ec-a153e27b4487
 
-        :setup: register content host, verify 'subscription status' is
-                invalid, import a manifest
-
         :steps:
 
-            1. Add subscriptions to content host
-            2. Run: hammer task list
+            1. Register Content Host without subscriptions attached
+            2. Verify subscriptions status is invalid
+            3. Import a Manifest
+            4. Attach subs to content host
+            5. verify subscription status is green "valid" with
+               "hammer subscription list --host-id x"
+            6. check candlepin events processed/failed
 
-        :expectedresults: 'Attach subscriptions to content host' is
-                          successful
+        :expectedresults: Candlepin events are being read and processed
+                          processed correctly without any failures
+        :BZ: #1826515
 
         :CaseImportance: High
         """

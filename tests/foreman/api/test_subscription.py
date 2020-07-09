@@ -249,20 +249,27 @@ class SubscriptionsTestCase(APITestCase):
             assert "Disabled" in str(host_content)
 
     @stubbed()
-    def test_positive_candlepin_events_processed_by_stomp(self):
-        """Create host and attach subscription in the API to verify
-            subscription status is valid
+    def test_positive_candlepin_events_processed_by_STOMP(self):
+        """Verify that candlepin events are being read and processed by
+           attaching subscriptions, validating host subscriptions status,
+           and viewing processed/failed candlepin events
 
         :id: efd20ffd-8f98-4536-abb6-d080f9d23169
-        :setup: register content host, verify 'subscription status' is
-                invalid (2), import a manifest
 
         :steps:
 
             1. Add subscriptions to content host
-            2. <your-satellite-url>/api/v2/hosts
+            2. Verify subscription status is invalid at
+               <your-satellite-url>/api/v2/hosts
+            3. Import a Manifest
+            4. Attach subs to content host
+            5. verify subscription status is valid at
+            6. Check ping api for processed and failed events at
+               /katello/api/v2/ping
 
-        :expectedresults: "subscription status" is set to 0 (valid)
+        :expectedresults: Candlepin events are being read and processed
+                          processed correctly without any failures
+        :BZ: #1826515
 
         :CaseImportance: High
         """
