@@ -29,6 +29,7 @@ from robottelo.constants import PRDS
 from robottelo.constants import REPOS
 from robottelo.constants import REPOSET
 from robottelo.decorators import run_in_one_thread
+from robottelo.decorators import stubbed
 from robottelo.decorators import tier1
 from robottelo.decorators import tier2
 from robottelo.decorators import tier3
@@ -229,3 +230,28 @@ class SubscriptionTestCase(CLITestCase):
             {'organization-id': org.id}
         )
         self.assertEquals(0, len(Subscription.list({'organization-id': org.id})))
+
+    @stubbed()
+    def test_positive_candlepin_events_processed_by_STOMP(self):
+        """Verify that candlepin events are being read and processed by
+           attaching subscriptions, validating host subscriptions status,
+           and viewing processed/failed candlepin events
+
+        :id: d54a7652-f87d-4277-a0ec-a153e27b4487
+
+        :steps:
+
+            1. Register Content Host without subscriptions attached
+            2. Verify subscriptions status is invalid
+            3. Import a Manifest
+            4. Attach subs to content host
+            5. verify subscription status is green "valid" with
+               "hammer subscription list --host-id x"
+            6. check candlepin events processed/failed
+
+        :expectedresults: Candlepin events are being read and processed
+                          processed correctly without any failures
+        :BZ: #1826515
+
+        :CaseImportance: High
+        """

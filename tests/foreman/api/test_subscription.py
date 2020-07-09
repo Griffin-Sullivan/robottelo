@@ -28,6 +28,7 @@ from robottelo.api.utils import upload_manifest
 from robottelo.cli.subscription import Subscription
 from robottelo.decorators import run_in_one_thread
 from robottelo.decorators import skip_if_not_set
+from robottelo.decorators import stubbed
 from robottelo.decorators import tier1
 from robottelo.decorators import tier2
 from robottelo.test import APITestCase
@@ -181,3 +182,29 @@ class SubscriptionsTestCase(APITestCase):
             data={'organization_id': org.id}
         )
         self.assertEquals(0, len(Subscription.list({'organization-id': org.id})))
+
+    @stubbed()
+    def test_positive_candlepin_events_processed_by_STOMP(self):
+        """Verify that candlepin events are being read and processed by
+           attaching subscriptions, validating host subscriptions status,
+           and viewing processed/failed candlepin events
+
+        :id: efd20ffd-8f98-4536-abb6-d080f9d23169
+
+        :steps:
+
+            1. Add subscriptions to content host
+            2. Verify subscription status is invalid at
+               <your-satellite-url>/api/v2/hosts
+            3. Import a Manifest
+            4. Attach subs to content host
+            5. verify subscription status is valid at
+            6. Check ping api for processed and failed events at
+               /katello/api/v2/ping
+
+        :expectedresults: Candlepin events are being read and processed
+                          processed correctly without any failures
+        :BZ: #1826515
+
+        :CaseImportance: High
+        """

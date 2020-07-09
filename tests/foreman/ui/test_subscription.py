@@ -35,6 +35,7 @@ from robottelo.constants import VIRT_WHO_HYPERVISOR_TYPES
 from robottelo.decorators import run_in_one_thread
 from robottelo.decorators import setting_is_set
 from robottelo.decorators import skip_if_not_set
+from robottelo.decorators import stubbed
 from robottelo.decorators import tier2
 from robottelo.decorators import tier3
 from robottelo.decorators import upgrade
@@ -418,3 +419,29 @@ def test_select_customizable_columns_uncheck_and_checks_all_checkboxes(session):
         checkbox_dict.update((k, True) for k in checkbox_dict)
         col = session.subscription.filter_columns(checkbox_dict)
         assert set(col[1:]) == set(checkbox_dict)
+
+
+@stubbed()
+def test_positive_candlepin_events_processed_by_STOMP(self):
+    """Verify that candlepin events are being read and processed by
+       attaching subscriptions, validating host subscriptions status,
+       and viewing processed/failed candlepin events
+
+    :id: 9510fd1c-2efb-4132-8665-9a72273cd1af
+
+    :steps:
+
+        1. Register Content Host without subscriptions attached
+        2. Verify subscriptions status is red "invalid"
+        3. Import a Manifest
+        4. Attach subs to content host
+        5. verify subscription status is green "valid"
+        6. check candlepin events processed/failed
+
+    :expectedresults: Candlepin events are being read and processed
+                      processed correctly without any failures
+
+    :BZ: #1826515
+
+    :CaseImportance: High
+    """
