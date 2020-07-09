@@ -35,6 +35,7 @@ from robottelo.constants import PRDS
 from robottelo.constants import REPOS
 from robottelo.constants import REPOSET
 from robottelo.decorators import run_in_one_thread
+from robottelo.decorators import stubbed
 from robottelo.decorators import tier1
 from robottelo.decorators import tier2
 from robottelo.decorators import tier3
@@ -281,3 +282,24 @@ class SubscriptionTestCase(CLITestCase):
             host_id = host[0].id
             host_content = entities.Host(id=host_id).read_raw().content
             assert "Disabled" in str(host_content)
+
+    @stubbed()
+    def test_positive_candlepin_events_processed_by_stomp(self):
+        """Create host and attach subscription in the CLI to verify
+           subscription status is valid
+
+        :id: d54a7652-f87d-4277-a0ec-a153e27b4487
+
+        :setup: register content host, verify 'subscription status' is
+                invalid, import a manifest
+
+        :steps:
+
+            1. Add subscriptions to content host
+            2. Run: hammer task list
+
+        :expectedresults: 'Attach subscriptions to content host' is
+                          successful
+
+        :CaseImportance: High
+        """

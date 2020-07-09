@@ -35,6 +35,7 @@ from robottelo.constants import REPOS
 from robottelo.constants import REPOSET
 from robottelo.decorators import run_in_one_thread
 from robottelo.decorators import skip_if_not_set
+from robottelo.decorators import stubbed
 from robottelo.decorators import tier1
 from robottelo.decorators import tier2
 from robottelo.test import APITestCase
@@ -246,3 +247,22 @@ class SubscriptionsTestCase(APITestCase):
             host_id = host[0].id
             host_content = entities.Host(id=host_id).read_raw().content
             assert "Disabled" in str(host_content)
+
+    @stubbed()
+    def test_positive_candlepin_events_processed_by_stomp(self):
+        """Create host and attach subscription in the API to verify
+            subscription status is valid
+
+        :id: efd20ffd-8f98-4536-abb6-d080f9d23169
+        :setup: register content host, verify 'subscription status' is
+                invalid (2), import a manifest
+
+        :steps:
+
+            1. Add subscriptions to content host
+            2. <your-satellite-url>/api/v2/hosts
+
+        :expectedresults: "subscription status" is set to 0 (valid)
+
+        :CaseImportance: High
+        """

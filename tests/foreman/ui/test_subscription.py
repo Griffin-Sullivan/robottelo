@@ -40,6 +40,7 @@ from robottelo.constants import VIRT_WHO_HYPERVISOR_TYPES
 from robottelo.decorators import run_in_one_thread
 from robottelo.decorators import setting_is_set
 from robottelo.decorators import skip_if_not_set
+from robottelo.decorators import stubbed
 from robottelo.decorators import tier2
 from robottelo.decorators import tier3
 from robottelo.decorators import upgrade
@@ -483,3 +484,24 @@ def test_positive_subscription_status_disabled(session, content_host_setup):
                 'subscription_status'
             ]
             assert "Disabled" in host
+
+
+@stubbed()
+def test_positive_candlepin_events_processed_by_stomp(self):
+    """Create host and attach subscription in the UI to verify
+       subscription status is valid
+
+    :id: 9510fd1c-2efb-4132-8665-9a72273cd1af
+
+    :setup: register content host, verify 'subscription status' is
+            invalid, import a manifest
+
+    :steps:
+
+        1. Add subscriptions to your content host
+        2. Return to content host list
+
+    :expectedresults: 'Subscription Status' is a green check mark.
+
+    :CaseImportance: High
+    """

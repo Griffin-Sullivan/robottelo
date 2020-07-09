@@ -803,7 +803,7 @@ FAKE_0_CUSTOM_PACKAGE_GROUP = [
 FAKE_1_YUM_REPO_RPMS = ['bear-4.1-1.noarch.rpm', 'camel-0.1-1.noarch.rpm', 'cat-1.0-1.noarch.rpm']
 FAKE_0_PUPPET_MODULE = 'httpd'
 
-FAKE_PULP_REMOTE_FILEREPO = 'https://pondrejk.fedorapeople.org/test_repos/filerepo/'
+FAKE_PULP_REMOTE_FILEREPO = 'http://localhost:3001/test_repos/filerepo/'
 
 FAKE_0_YUM_REPO_STRING_BASED_VERSIONS = (
     'https://fixtures.pulpproject.org/rpm-string-version-updateinfo/'
