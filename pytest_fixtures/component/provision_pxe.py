@@ -226,8 +226,9 @@ def provisioning_host(module_ssh_key_file, request):
 def pxeless_discovery_host(provisioning_host, module_discovery_sat):
     """Fixture for returning a pxe-less discovery host for provisioning"""
     sat = module_discovery_sat.sat
+    prov_host = provisioning_host.prov_host
     image_name = f"{gen_string('alpha')}-{module_discovery_sat.iso}"
-    mac = provisioning_host._broker_args['provisioning_nic_mac_addr']
+    mac = prov_host._broker_args['provisioning_nic_mac_addr']
     # Remaster and upload discovery image to automatically input values
     result = sat.execute(
         'cd /var/www/html/pub && '
@@ -237,26 +238,26 @@ def pxeless_discovery_host(provisioning_host, module_discovery_sat):
     pattern = re.compile(r"foreman-discovery-image\S+")
     fdi = pattern.findall(result.stdout)[0]
     Broker(
-        workflow="import-disk-image",
+        workflow='import-disk-image',
         import_disk_image_name=image_name,
         import_disk_image_url=(f'https://{sat.hostname}/pub/{fdi}'),
     ).execute()
     # Change host to boot from CD ISO
     Broker(
-        job_template="configure-pxe-boot-rhv",
-        target_host=provisioning_host.name,
+        job_template='configure-pxe-boot-rhv',
+        target_host=prov_host.name,
         target_vlan_id=settings.provisioning.vlan_id,
-        target_vm_firmware=provisioning_host._broker_args['target_vm_firmware'],
+        target_vm_firmware=provisioning_host.vm_firmware,
         target_vm_cd_iso=image_name,
-        target_boot_scenario="pxeless_pre",
+        target_boot_scenario='pxeless_pre',
     ).execute()
-    yield provisioning_host
+    yield prov_host
     # Remove ISO from host and delete disk image
     Broker(
-        job_template="configure-pxe-boot-rhv",
-        target_host=provisioning_host.name,
+        job_template='configure-pxe-boot-rhv',
+        target_host=prov_host.name,
         target_vlan_id=settings.provisioning.vlan_id,
-        target_vm_firmware=provisioning_host._broker_args['target_vm_firmware'],
-        target_boot_scenario="pxeless_pre",
+        target_vm_firmware=provisioning_host.vm_firmware,
+        target_boot_scenario='pxeless_pre',
     ).execute()
-    Broker(workflow="remove-disk-image", remove_disk_image_name=image_name).execute()
+    Broker(workflow='remove-disk-image', remove_disk_image_name=image_name).execute()
